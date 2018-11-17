@@ -1,0 +1,166 @@
+-- Spool files for create table and alter table commands--
+--Student ID: 1001624311 Student Name :Anushree Badarinath Kasal
+--Student ID: 1001682465 Student Name :Venkata Adilakshmi Rajitha Kalapatapu 
+
+
+
+CREATE TABLE `security_database`.`user_account` (
+  `user_account_id` INT NOT NULL,
+  `fname` VARCHAR(45) NULL,
+  `lname` VARCHAR(45) NULL,
+  `area_code` INT NULL,
+  `state_code` INT NULL,
+  `number` INT NULL,
+  PRIMARY KEY (`user_account_id`));
+  
+
+  
+  CREATE TABLE `security_database`.`user_role` (
+  `role_id` INT NOT NULL,
+  `role_name` VARCHAR(45) NULL,
+  `description` VARCHAR(45) NULL,
+  `uid` INT NULL,
+  PRIMARY KEY (`role_id`));
+  
+  
+  CREATE TABLE `security_database`.`assigned_with` (
+  `aw_role_id` INT NOT NULL,
+  `aw_uid` INT NOT NULL,
+  PRIMARY KEY (`aw_role_id`, `aw_uid`));
+  
+  
+  CREATE TABLE `security_database`.`account_privilege` (
+  `acc_priv_name` VARCHAR(45) NOT NULL,
+  `ap_uid` INT NULL,
+  `ap_role_id` INT NULL,
+  PRIMARY KEY (`acc_priv_name`));
+  
+  CREATE TABLE `security_database`.`relation_privilege` (
+  `rel_priv_name` VARCHAR(45) NOT NULL,
+  `rp_role_id` INT NULL,
+  `rp_table_name` VARCHAR(45) NULL,
+  PRIMARY KEY (`rel_priv_name`));
+  
+  
+  CREATE TABLE `security_database`.`table` (
+  `table_name` VARCHAR(45) NOT NULL,
+  `table_uid` INT NULL,
+  `table_role_id` INT NULL,
+  `table_rp_name` VARCHAR(45) NULL,
+  PRIMARY KEY (`table_name`));
+  
+  
+  CREATE TABLE `security_database`.`part_of` (
+  `role_id` INT NOT NULL,
+  `po_table_name` VARCHAR(45) NOT NULL,
+  `po_rp_name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`role_id`, `po_table_name`, `po_rp_name`));
+  
+  
+  
+ --Alter table commands to add foreign keys
+ 
+ 
+ 
+ 
+ ALTER TABLE `security_database`.`user_role` 
+ADD CONSTRAINT `ur_ua`
+  FOREIGN KEY (`uid`)
+  REFERENCES `security_database`.`user_account` (`user_account_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  
+  ALTER TABLE `security_database`.`user_role` 
+
+ADD UNIQUE INDEX `role_name_UNIQUE` (`role_name` ASC);
+;
+  
+  ALTER TABLE `security_database`.`assigned_with` 
+ADD CONSTRAINT `aw_ur`
+  FOREIGN KEY (`aw_role_id`)
+  REFERENCES `security_database`.`user_role` (`role_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  
+  ALTER TABLE `security_database`.`assigned_with` 
+ADD CONSTRAINT `aw_ua`
+  FOREIGN KEY (`aw_uid`)
+  REFERENCES `security_database`.`user_account` (`user_account_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  
+  ALTER TABLE `security_database`.`account_privilege` 
+ADD CONSTRAINT `ap_ua`
+  FOREIGN KEY (`ap_uid`)
+  REFERENCES `security_database`.`user_account` (`user_account_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  
+  ALTER TABLE `security_database`.`account_privilege` 
+ADD CONSTRAINT `ap_ur`
+  FOREIGN KEY (`ap_role_id`)
+  REFERENCES `security_database`.`user_role` (`role_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  
+  ALTER TABLE `security_database`.`relation_privilege` 
+ADD CONSTRAINT `rp_ur`
+  FOREIGN KEY (`rp_role_id`)
+  REFERENCES `security_database`.`user_role` (`role_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  
+  
+  ALTER TABLE `security_database`.`relation_privilege` 
+ADD CONSTRAINT `rp_t`
+  FOREIGN KEY (`rp_table_name`)
+  REFERENCES `security_database`.`table` (`table_name`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  
+  ALTER TABLE `security_database`.`table` 
+ADD CONSTRAINT `t_ua`
+  FOREIGN KEY (`table_uid`)
+  REFERENCES `security_database`.`user_account` (`user_account_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  
+  ALTER TABLE `security_database`.`table` 
+ADD CONSTRAINT `t_ur`
+  FOREIGN KEY (`table_role_id`)
+  REFERENCES `security_database`.`user_role` (`role_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  
+  
+  ALTER TABLE `security_database`.`table` 
+ADD CONSTRAINT `t_rp`
+  FOREIGN KEY (`table_rp_name`)
+  REFERENCES `security_database`.`relation_privilege` (`rel_priv_name`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  
+  
+  ALTER TABLE `security_database`.`part_of` 
+ADD CONSTRAINT `po_ur`
+  FOREIGN KEY (`role_id`)
+  REFERENCES `security_database`.`user_role` (`role_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  
+  
+  ALTER TABLE `security_database`.`part_of` 
+ADD CONSTRAINT `po_t`
+  FOREIGN KEY (`po_table_name`)
+  REFERENCES `security_database`.`table` (`table_name`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  
+  
+  ALTER TABLE `security_database`.`part_of` 
+ADD CONSTRAINT `po_rp`
+  FOREIGN KEY (`po_rp_name`)
+  REFERENCES `security_database`.`relation_privilege` (`rel_priv_name`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  
