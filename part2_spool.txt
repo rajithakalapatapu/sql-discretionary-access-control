@@ -1,0 +1,123 @@
+--------------
+SELECT * FROM security_database.account_privilege
+--------------
+
++---------------+--------+------------+
+| acc_priv_name | ap_uid | ap_role_id |
++---------------+--------+------------+
+| A1            |    121 |        200 |
+| A2            |    131 |        300 |
+| A3            |    141 |        400 |
+| A4            |    151 |        500 |
+| A5            |    161 |        600 |
++---------------+--------+------------+
+5 rows in set (0.00 sec)
+
+--------------
+SELECT * FROM security_database.assigned_with
+--------------
+
++------------+--------+
+| aw_role_id | aw_uid |
++------------+--------+
+|        200 |    121 |
+|        300 |    131 |
+|        400 |    141 |
+|        500 |    151 |
+|        600 |    161 |
++------------+--------+
+5 rows in set (0.00 sec)
+
+--------------
+SELECT * FROM security_database.part_of
+--------------
+
++---------+---------------+------------+
+| role_id | po_table_name | po_rp_name |
++---------+---------------+------------+
+|     200 | doctor        | R1         |
+|     300 | employee      | R2         |
+|     400 | nurse         | R3         |
+|     500 | record        | R4         |
+|     600 | room          | R5         |
++---------+---------------+------------+
+5 rows in set (0.00 sec)
+
+--------------
+SELECT * FROM security_database.relation_privilege
+--------------
+
++---------------+------------+---------------+
+| rel_priv_name | rp_role_id | rp_table_name |
++---------------+------------+---------------+
+| delete        |        500 | record        |
+| insert        |        400 | nurse         |
+| modify        |        500 | room          |
+| R1            |        200 | doctor        |
+| R2            |        300 | employee      |
+| R3            |        400 | nurse         |
+| R4            |        500 | record        |
+| R5            |        500 | room          |
+| select        |        200 | doctor        |
+| update        |        300 | employee      |
++---------------+------------+---------------+
+10 rows in set (0.00 sec)
+
+--------------
+SELECT * FROM security_database.`table`
+--------------
+
++--------------+-----------+---------------+---------------+
+| table_name   | table_uid | table_role_id | table_rp_name |
++--------------+-----------+---------------+---------------+
+| bill_info    |       121 |           200 | R1            |
+| doctor       |       121 |           200 | R1            |
+| employee     |       131 |           300 | R2            |
+| maintains    |       141 |           400 | R3            |
+| medicine     |       131 |           300 | R2            |
+| nurse        |       141 |           400 | R3            |
+| patient      |       141 |           400 | R3            |
+| permanent    |       131 |           300 | R2            |
+| receptionist |       151 |           500 | R4            |
+| record       |       151 |           500 | R4            |
+| room         |       161 |           600 | R5            |
+| treatment    |       161 |           600 | R5            |
+| visiting     |       121 |           200 | R1            |
++--------------+-----------+---------------+---------------+
+13 rows in set (0.00 sec)
+
+--------------
+SELECT * FROM security_database.user_account
+--------------
+
++-----------------+----------+--------+-----------+------------+------------+
+| user_account_id | fname    | lname  | area_code | state_code | number     |
++-----------------+----------+--------+-----------+------------+------------+
+|             121 | ron      | adams  |     23456 |      32145 | 2147483647 |
+|             131 | Mathew   | Perry  |     55667 |      67834 | 2147483647 |
+|             141 | monica   | geller |     77665 |      87654 | 2147483647 |
+|             151 | ross     | geller |     28786 |      32145 | 2147483647 |
+|             161 | rondha   | adams  |     23456 |      32145 | 2147483647 |
+|             171 | geetha   | singh  |     23457 |      33345 | 2147483647 |
+|             181 | gayathri | mary   |     23459 |      32135 | 2147483647 |
+|             191 | ron      | john   |     23458 |      32045 | 2147483647 |
+|             201 | kate     | johny  |     13456 |      42145 | 2147483647 |
+|             211 | kristin  | pope   |     89934 |      78654 |       NULL |
++-----------------+----------+--------+-----------+------------+------------+
+10 rows in set (0.00 sec)
+
+--------------
+SELECT * FROM security_database.user_role
+--------------
+
++---------+------------------+-----------------------------------------------------------------------------------+------+
+| role_id | role_name        | description                                                                       | uid  |
++---------+------------------+-----------------------------------------------------------------------------------+------+
+|     200 | db_owner         | Can do anything                                                                   |  121 |
+|     300 | db_securityadmin | Can modify role membership and manage permissions                                 |  131 |
+|     400 | db_accessadmin   | Can add pr remove access to the DB for windows logins,group and sql server logins |  141 |
+|     500 | db_datawriter    | Can add,delete or change data in all user tables                                  |  151 |
+|     600 | db_datareader    | Can read all data from all user tables                                            |  161 |
++---------+------------------+-----------------------------------------------------------------------------------+------+
+5 rows in set (0.00 sec)
+
