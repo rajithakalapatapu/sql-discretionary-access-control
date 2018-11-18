@@ -1,6 +1,5 @@
 <?php
 
-$user_account_id_to_insert = "";
 $fname_to_insert = "";
 $lname_to_insert = "";
 $area_code_to_insert = "";
@@ -15,7 +14,6 @@ if (isset($_POST['submit']) && (
         ($_POST['state_code']) != "" &&
         ($_POST['number']) != "")) {
 
-    $_SESSION['user_account_id'] = $_POST['user_account_id'];
     $_SESSION['fname'] = $_POST['fname'];
     $_SESSION['lname'] = $_POST['lname'];
     $_SESSION['area_code'] = $_POST['area_code'];
@@ -25,14 +23,12 @@ if (isset($_POST['submit']) && (
     header("Location: " . $_SERVER['REQUEST_URI']);
     exit;
 } else {
-    $user_account_id_to_insert = $_SESSION['user_account_id'];
     $fname_to_insert = $_SESSION['fname'];
     $lname_to_insert = $_SESSION['lname'];
     $area_code_to_insert = $_SESSION['area_code'];
     $state_code_to_insert = $_SESSION['state_code'];
     $number_to_insert = $_SESSION['number'];
 
-    unset($_SESSION['user_account_id']);
     unset($_SESSION['fname']);
     unset($_SESSION['lname']);
     unset($_SESSION['area_code']);
@@ -50,15 +46,7 @@ if (isset($_POST['submit']) && (
 <?php
 if ($fname_to_insert != "") {
     echo "Welcome " . $fname_to_insert . "<br/>";
-    echo "Creating your account...";
-
-    $insert = " insert into user_account values (%d, '%s', '%s', %d, %d, %d)";
-    $sql = sprintf($insert,
-        $user_account_id_to_insert,
-        $fname_to_insert, $lname_to_insert,
-        $area_code_to_insert, $state_code_to_insert, $number_to_insert);
-
-    echo "Going to run " . $sql . "\n";
+    echo "Creating your account... \n";
 
     $servername = "localhost";
     $username = "root";
@@ -72,25 +60,37 @@ if ($fname_to_insert != "") {
         die("Connection failed: " . $conn->connect_error);
     }
 
+    $user_account_id_to_insert = 0;
+    $sql = "select max(user_account_id) from user_account";
+    $result = $conn->query($sql);
+    while ($row = $result->fetch_assoc()) {
+        $user_account_id_to_insert = intval($row['max(user_account_id)']) + 1;
+    }
+
+    $insert = " insert into user_account values (%d, '%s', '%s', %d, %d, %d)";
+    $sql = sprintf($insert,
+        $user_account_id_to_insert,
+        $fname_to_insert, $lname_to_insert,
+        $area_code_to_insert, $state_code_to_insert, $number_to_insert);
+
+    echo "Going to run '" . $sql . "'\n";
+
+
     $result = $conn->query($sql);
 
     if ($result === true) {
         // output data of each row
-        echo "New Record created successfully" . "\n<br>";
+        echo "New Record created successfully" . "<br>";
+        echo "Account created! ";
     } else {
         echo "Error:'" . $sql . "'<br>" . $conn->error . "<br>";
     }
 
     $conn->close();
-    echo "Account created! ";
-
 } else {
     ?>
 
     <form method="post">
-        <label for="user_account_id">ID:</label>
-        <input id="user_account_id" type="text" name="user_account_id"/>
-        <br>
         <label for="fname">FirstName:</label>
         <input id="fname" type="text" name="fname"/>
         <br>
