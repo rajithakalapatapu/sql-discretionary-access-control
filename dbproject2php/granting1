@@ -1,0 +1,2 @@
+grant insert(user_account_id) on user_account to A1;
+grant

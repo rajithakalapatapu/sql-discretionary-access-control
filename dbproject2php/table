@@ -1,0 +1,13 @@
+INSERT INTO `security_database`.`table` (`table_name`,`table_uid`,`table_role_id`,`table_rp_name`) VALUES ("doctor",121,200,"R1");
+INSERT INTO `security_database`.`table` (`table_name`,`table_uid`,`table_role_id`,`table_rp_name`) VALUES ("employee",131,300,"R2");
+INSERT INTO `security_database`.`table` (`table_name`,`table_uid`,`table_role_id`,`table_rp_name`) VALUES ("nurse",141,400,"R3");
+INSERT INTO `security_database`.`table` (`table_name`,`table_uid`,`table_role_id`,`table_rp_name`) VALUES ("record",151,500,"R4");
+INSERT INTO `security_database`.`table` (`table_name`,`table_uid`,`table_role_id`,`table_rp_name`) VALUES ("room",161,600,"R5");
+INSERT INTO `security_database`.`table` (`table_name`,`table_uid`,`table_role_id`,`table_rp_name`) VALUES ("bill_info",121,200,"R1");
+INSERT INTO `security_database`.`table` (`table_name`,`table_uid`,`table_role_id`,`table_rp_name`) VALUES ("medicine",131,300,"R2");
+INSERT INTO `security_database`.`table` (`table_name`,`table_uid`,`table_role_id`,`table_rp_name`) VALUES ("patient",141,400,"R3");
+INSERT INTO `security_database`.`table` (`table_name`,`table_uid`,`table_role_id`,`table_rp_name`) VALUES ("receptionist",151,500,"R4");
+INSERT INTO `security_database`.`table` (`table_name`,`table_uid`,`table_role_id`,`table_rp_name`) VALUES ("treatment",161,600,"R5");
+INSERT INTO `security_database`.`table` (`table_name`,`table_uid`,`table_role_id`,`table_rp_name`) VALUES ("visiting",121,200,"R1");
+INSERT INTO `security_database`.`table` (`table_name`,`table_uid`,`table_role_id`,`table_rp_name`) VALUES ("permanent",131,300,"R2");
+INSERT INTO `security_database`.`table` (`table_name`,`table_uid`,`table_role_id`,`table_rp_name`) VALUES ("maintains",141,400,"R3");

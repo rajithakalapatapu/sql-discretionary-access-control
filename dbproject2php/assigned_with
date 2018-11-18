@@ -1,0 +1,12 @@
+
+INSERT INTO `security_database`.`assigned_with` (`aw_role_id`,`aw_uid`) VALUES (200,121);
+INSERT INTO `security_database`.`assigned_with` (`aw_role_id`,`aw_uid`) VALUES (300,131);
+INSERT INTO `security_database`.`assigned_with` (`aw_role_id`,`aw_uid`) VALUES (400,141);
+INSERT INTO `security_database`.`assigned_with` (`aw_role_id`,`aw_uid`) VALUES (500,151);
+INSERT INTO `security_database`.`assigned_with` (`aw_role_id`,`aw_uid`) VALUES (600,161);
+
+
+
+
+
+

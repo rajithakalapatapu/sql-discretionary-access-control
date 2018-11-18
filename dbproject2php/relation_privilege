@@ -1,0 +1,5 @@
+INSERT INTO `security_database`.`relation_privilege` (`rel_priv_name`,`rp_role_id`,`rp_table_name`) VALUES ("R1",200,"doctor");
+INSERT INTO `security_database`.`relation_privilege` (`rel_priv_name`,`rp_role_id`,`rp_table_name`) VALUES ("R2",300,"employee");
+INSERT INTO `security_database`.`relation_privilege` (`rel_priv_name`,`rp_role_id`,`rp_table_name`) VALUES ("R3",400,"nurse");
+INSERT INTO `security_database`.`relation_privilege` (`rel_priv_name`,`rp_role_id`,`rp_table_name`) VALUES ("R4",500,"record");
+INSERT INTO `security_database`.`relation_privilege` (`rel_priv_name`,`rp_role_id`,`rp_table_name`) VALUES ("R5",500,"room");

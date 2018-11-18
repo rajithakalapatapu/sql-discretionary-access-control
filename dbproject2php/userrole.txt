@@ -1,0 +1,14 @@
+
+
+
+
+
+
+INSERT INTO `security_database`.`user_role` (`role_id`,`role_name`,`description`,`uid`) VALUES (200,"db_owner","Can do anything",121);
+INSERT INTO `security_database`.`user_role` (`role_id`,`role_name`,`description`,`uid`) VALUES (300,"db_securityadmin","Can modify role membership and manage permissions",131);
+INSERT INTO `security_database`.`user_role` (`role_id`,`role_name`,`description`,`uid`) VALUES (400,"db_accessadmin","Can add pr remove access to the DB for windows logins,group and sql server logins",141);
+INSERT INTO `security_database`.`user_role` (`role_id`,`role_name`,`description`,`uid`) VALUES (500,"db_datawriter","Can add,delete or change data in all user tables",151);
+INSERT INTO `security_database`.`user_role` (`role_id`,`role_name`,`description`,`uid`) VALUES (600,"db_datareader","Can read all data from all user tables",161);
+
+
+

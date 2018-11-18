@@ -1,0 +1,5 @@
+INSERT INTO `security_database`.`part_of` (`role_id`,`po_table_name`,`po_rp_name`) VALUES (200,"doctor","R1");
+INSERT INTO `security_database`.`part_of` (`role_id`,`po_table_name`,`po_rp_name`) VALUES (300,"employee","R2");
+INSERT INTO `security_database`.`part_of` (`role_id`,`po_table_name`,`po_rp_name`) VALUES (400,"nurse","R3");
+INSERT INTO `security_database`.`part_of` (`role_id`,`po_table_name`,`po_rp_name`) VALUES (500,"record","R4");
+INSERT INTO `security_database`.`part_of` (`role_id`,`po_table_name`,`po_rp_name`) VALUES (600,"room","R5");
