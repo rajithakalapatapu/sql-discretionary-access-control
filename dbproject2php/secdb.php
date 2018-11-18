@@ -49,4 +49,22 @@ function get_user_names_ids($conn) {
     }
     return $output;
 }
+
+function get_user_roles($conn) {
+    $output = array();
+    $result = $conn->query("select role_id, role_name from user_role");
+    while ($row = $result->fetch_assoc()) {
+        $output[$row['role_id']] = $row['role_name'];
+    }
+    return $output;
+}
+
+function get_rel_privileges($conn) {
+    $output = array();
+    $result = $conn->query("select rel_priv_name from relation_privilege");
+    while ($row = $result->fetch_assoc()) {
+        $output[$row['rel_priv_name']] = $row['rel_priv_name'];
+    }
+    return $output;
+}
 ?>

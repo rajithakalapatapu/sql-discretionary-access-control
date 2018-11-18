@@ -76,18 +76,6 @@ if ($role_name_to_insert != "") {
         <select id="link_user_account" name="link_account">
         <?php
 
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "security_database";
-
-        // Create connection
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-
         $names_ids = get_user_names_ids(get_db_connection());
 
         foreach($names_ids as $key => $value) {
