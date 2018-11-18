@@ -76,4 +76,13 @@ function get_account_privileges($conn) {
     }
     return $output;
 }
+
+function get_tables($conn) {
+    $output = array();
+    $result = $conn->query("select table_name from security_database.table");
+    while ($row = $result->fetch_assoc()) {
+        $output[$row['table_name']] = $row['table_name'];
+    }
+    return $output;
+}
 ?>

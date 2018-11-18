@@ -41,7 +41,6 @@ if ($link_account != 0) {
     if ($result === true) {
         // output data of each row
         echo "New Record created successfully" . "<br>";
-        echo "Table created! ";
     } else {
         echo "The user with id " . $link_role . " has a conflict while linking to user role with id " . $link_role . "\n";
         echo "Error:'" . $sql . "'<br>" . $conn->error . "<br>";
