@@ -36,8 +36,8 @@ if ($link_rel_privilege != '') {
 
     $conn = get_db_connection();
 
-    $insert = " insert into security_database.relation_privilege values ('%s', %d, '%s')";
-    $sql = sprintf($insert, $link_rel_privilege, $link_role, $link_table);
+    $insert = " insert into security_database.part_of values (%d, '%s', '%s')";
+    $sql = sprintf($insert, $link_role, $link_table, $link_rel_privilege);
     echo "Going to run '" . $sql . "'\n";
 
     $result = $conn->query($sql);
@@ -45,7 +45,6 @@ if ($link_rel_privilege != '') {
     if ($result === true) {
         // output data of each row
         echo "New Record created successfully" . "<br>";
-        echo "Table created! ";
     } else {
         echo "Error:'" . $sql . "'<br>" . $conn->error . "<br>";
     }
