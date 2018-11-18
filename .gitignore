@@ -12,6 +12,7 @@ dbproject2php/.idea/**/shelf
 dbproject2php/.idea/**/contentModel.xml
 
 # Sensitive or high-churn files
+dbproject2php/.idea/dataSources.xml
 dbproject2php/.idea/**/dataSources/
 dbproject2php/.idea/**/dataSources.ids
 dbproject2php/.idea/**/dataSources.local.xml
