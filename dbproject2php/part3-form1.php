@@ -1,59 +1,110 @@
 <?php
 
-$name = "";
+$user_account_id_to_insert = "";
+$fname_to_insert = "";
+$lname_to_insert = "";
+$area_code_to_insert = "";
+$state_code_to_insert = "";
+$number_to_insert = "";
 session_start();
 
 if (isset($_POST['submit']) && (
-        ($_POST['name']) != "" && ($_POST['id']) != "" && ($_POST['role']) != "")) {
-    $_SESSION['name'] = $_POST['name'];
-    $_SESSION['id'] = $_POST['id'];
-    $_SESSION['role'] = $_POST['role'];
+        ($_POST['fname']) != "" &&
+        ($_POST['lname']) != "" &&
+        ($_POST['area_code']) != "" &&
+        ($_POST['state_code']) != "" &&
+        ($_POST['number']) != "")) {
+
+    $_SESSION['user_account_id'] = $_POST['user_account_id'];
+    $_SESSION['fname'] = $_POST['fname'];
+    $_SESSION['lname'] = $_POST['lname'];
+    $_SESSION['area_code'] = $_POST['area_code'];
+    $_SESSION['state_code'] = $_POST['state_code'];
+    $_SESSION['number'] = $_POST['number'];
+
     header("Location: " . $_SERVER['REQUEST_URI']);
     exit;
 } else {
-    if (isset($_SESSION['name']) && isset($_SESSION['id']) && isset($_SESSION['role'])) {
-        //Retrieve show string from form submission.
-        $name = $_SESSION['name'];
-        $id = $_SESSION['id'];
-        $role = $_SESSION['role'];
-        unset($_SESSION['name']);
-        unset($_SESSION['id']);
-        unset($_SESSION['role']);
-    }
+    $user_account_id_to_insert = $_SESSION['user_account_id'];
+    $fname_to_insert = $_SESSION['fname'];
+    $lname_to_insert = $_SESSION['lname'];
+    $area_code_to_insert = $_SESSION['area_code'];
+    $state_code_to_insert = $_SESSION['state_code'];
+    $number_to_insert = $_SESSION['number'];
+
+    unset($_SESSION['user_account_id']);
+    unset($_SESSION['fname']);
+    unset($_SESSION['lname']);
+    unset($_SESSION['area_code']);
+    unset($_SESSION['state_code']);
+    unset($_SESSION['number']);
 }
 
 ?>
 
 <!DOCTYPE html >
-<head>
+<head xmlns="http://www.w3.org/1999/html">
     <title>DB Project 2</title>
 </head>
 <body>
-<br/><br/>
-<h2>Enter your credentials</h2>
-
 <?php
-if ($name != "") {
-    echo "Welcome " . $name . "<br/>";
-    echo "Getting your privileges...";
+if ($fname_to_insert != "") {
+    echo "Welcome " . $fname_to_insert . "<br/>";
+    echo "Creating your account...";
 
-    
+    $insert = " insert into user_account values (%d, '%s', '%s', %d, %d, %d)";
+    $sql = sprintf($insert,
+        $user_account_id_to_insert,
+        $fname_to_insert, $lname_to_insert,
+        $area_code_to_insert, $state_code_to_insert, $number_to_insert);
+
+    echo "Going to run " . $sql . "\n";
+
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "security_database";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $result = $conn->query($sql);
+
+    if ($result === true) {
+        // output data of each row
+        echo "New Record created successfully" . "\n<br>";
+    } else {
+        echo "Error:'" . $sql . "'<br>" . $conn->error . "<br>";
+    }
+
+    $conn->close();
+    echo "Account created! ";
 
 } else {
     ?>
 
-
-    <p><h3>Enter text in the box then select "Go":</h3></p>
-
     <form method="post">
-        <label for="name">Name:</label>
-        <input id="name" type="text" name="name"/>
+        <label for="user_account_id">ID:</label>
+        <input id="user_account_id" type="text" name="user_account_id"/>
         <br>
-        <label for="id">ID:</label>
-        <input id="id" type="text" name="id"/>
+        <label for="fname">FirstName:</label>
+        <input id="fname" type="text" name="fname"/>
         <br>
-        <label for="role">Role:</label>
-        <input id="role" type="text" name="role"/>
+        <label for="lname">LastName:</label>
+        <input id="lname" type="text" name="lname"/>
+        <br>
+        <label for="area_code">Area_Code:</label>
+        <input id="area_code" type="text" name="area_code"/>
+        <br>
+        <label for="state_code">State_Code:</label>
+        <input id="state_code" type="text" name="state_code"/>
+        <br>
+        <label for="number">Number:</label>
+        <input id="number" type="text" name="number"/>
         <br>
         <input type="submit" name="submit" value="Go"/>
     </form>
