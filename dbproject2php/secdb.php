@@ -67,4 +67,13 @@ function get_rel_privileges($conn) {
     }
     return $output;
 }
+
+function get_account_privileges($conn) {
+    $output = array();
+    $result = $conn->query("select acc_priv_name from account_privilege");
+    while ($row = $result->fetch_assoc()) {
+        $output[$row['acc_priv_name']] = $row['acc_priv_name'];
+    }
+    return $output;
+}
 ?>
