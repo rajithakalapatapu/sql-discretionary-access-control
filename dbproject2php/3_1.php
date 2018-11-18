@@ -23,11 +23,11 @@ if (isset($_POST['submit']) && (
     header("Location: " . $_SERVER['REQUEST_URI']);
     exit;
 } else {
-    $fname_to_insert = $_SESSION['fname'];
-    $lname_to_insert = $_SESSION['lname'];
-    $area_code_to_insert = $_SESSION['area_code'];
-    $state_code_to_insert = $_SESSION['state_code'];
-    $number_to_insert = $_SESSION['number'];
+    $fname_to_insert = isset($_SESSION['fname']) ? $_SESSION['fname'] : '';
+    $lname_to_insert = isset($_SESSION['lname']) ? $_SESSION['lname'] : '';
+    $area_code_to_insert = isset($_SESSION['area_code']) ? $_SESSION['area_code'] : '';
+    $state_code_to_insert = isset($_SESSION['state_code']) ? $_SESSION['state_code'] : '';
+    $number_to_insert = isset($_SESSION['number']) ? $_SESSION['number'] : '';
 
     unset($_SESSION['fname']);
     unset($_SESSION['lname']);
@@ -90,6 +90,7 @@ if ($fname_to_insert != "") {
 } else {
     ?>
 
+    <h2> Enter details for a new user account </h2>
     <form method="post">
         <label for="fname">FirstName:</label>
         <input id="fname" type="text" name="fname"/>
