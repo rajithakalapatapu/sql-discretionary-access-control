@@ -1,3 +1,4 @@
+<?php include 'secdb.php' ?>
 <?php
 
 $role_name_to_insert = "";
@@ -36,26 +37,8 @@ if (isset($_POST['submit']) && (
 if ($role_name_to_insert != "") {
     echo "Creating role... " . $role_name_to_insert . "\n";
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "security_database";
-
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    $user_role_id_to_insert = 0;
-    $sql = "select max(role_id) from user_role";
-    $result = $conn->query($sql);
-
-    while ($row = $result->fetch_assoc()) {
-
-        $user_role_id_to_insert = intval($row['max(role_id)']) + 100;
-    }
+    $conn = get_db_connection();
+    $user_role_id_to_insert = get_max_user_role($conn);
 
     $insert = " insert into user_role values (%d, '%s', '%s', %d)";
     $sql = sprintf($insert,
@@ -105,10 +88,10 @@ if ($role_name_to_insert != "") {
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $result = $conn->query("select user_account_id, fname from user_account");
+        $names_ids = get_user_names_ids(get_db_connection());
 
-        while ($row = $result->fetch_assoc()) {
-            echo "<option value=\"" . $row['user_account_id'] . "\">" .  $row['fname'] . "</option> <br>";
+        foreach($names_ids as $key => $value) {
+            echo "<option value=\"" . $key . "\">" .  $value . "</option> <br>";
         }
 
         ?>

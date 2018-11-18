@@ -1,3 +1,4 @@
+<?php include 'secdb.php' ?>
 <?php
 
 $fname_to_insert = "";
@@ -48,24 +49,8 @@ if ($fname_to_insert != "") {
     echo "Welcome " . $fname_to_insert . "<br/>";
     echo "Creating your account... \n";
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "security_database";
-
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    $user_account_id_to_insert = 0;
-    $sql = "select max(user_account_id) from user_account";
-    $result = $conn->query($sql);
-    while ($row = $result->fetch_assoc()) {
-        $user_account_id_to_insert = intval($row['max(user_account_id)']) + 1;
-    }
+    $conn = get_db_connection();
+    $user_account_id_to_insert = get_max_user_account($conn);
 
     $insert = " insert into user_account values (%d, '%s', '%s', %d, %d, %d)";
     $sql = sprintf($insert,
@@ -74,7 +59,6 @@ if ($fname_to_insert != "") {
         $area_code_to_insert, $state_code_to_insert, $number_to_insert);
 
     echo "Going to run '" . $sql . "'\n";
-
 
     $result = $conn->query($sql);
 
